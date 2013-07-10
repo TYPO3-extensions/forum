@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-07-10T20:14:04Z" product-name="forum">
+		<header/>
+		<body>
+
+			<trans-unit id="tx_forum_domain_model_board">
+				<source>Board</source>
+			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_board.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_board.boards">
+				<source>Boards</source>
+			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_board.threads">
+				<source>Threads</source>
+			</trans-unit>
+
+			<trans-unit id="tx_forum_domain_model_thread">
+				<source>Thread</source>
+			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_thread.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_thread.posts">
+				<source>Posts</source>
+			</trans-unit>
+
+			<trans-unit id="tx_forum_domain_model_post">
+				<source>Post</source>
+			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_post.header">
+				<source>Header</source>
+			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_post.unrendered_text">
+				<source>Unrendered Text</source>
+			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_post.rendered_text">
+				<source>Rendered Text</source>
+			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_post.user">
+				<source>User</source>
+			</trans-unit>
+
+			<trans-unit id="tx_forum_domain_model_forumuser">
+				<source>Forum User</source>
+			</trans-unit>
+			
+			<trans-unit id="fe_users.tx_extbase_type.Tx_Forum_ForumUser">
+				<source>Forum ForumUser</source>
+			</trans-unit>
+			
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-07-10T20:14:04Z" product-name="forum">
+		<header/>
+		<body>
+
+			<trans-unit id="header.description">
+				<source>The posts header</source>
+			</trans-unit>
+			<trans-unit id="unrendered_text.description">
+				<source>The posts unrendered Text</source>
+			</trans-unit>
+			<trans-unit id="rendered_text.description">
+				<source>The posts rendered Tex</source>
+			</trans-unit>
+			<trans-unit id="user.description">
+				<source>The posts owner</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-07-10T20:14:04Z" product-name="forum">
+		<header/>
+		<body>
+
+			<trans-unit id="title.description">
+				<source>The threads title</source>
+			</trans-unit>
+			<trans-unit id="posts.description">
+				<source>The threads posts</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
