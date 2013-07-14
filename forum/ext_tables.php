@@ -3,6 +3,17 @@ if (!defined('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
+$extensionName=t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
+
+// Group Travel
+Tx_Extbase_Utility_Extension::registerPlugin($_EXTKEY, 'main', 'LLL:EXT:forum/Resources/Private/Language/locallang_db.xlf:tx_forum.CeTitle' );
+$pluginSignature=\strtolower($extensionName).'_main';
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature]='pi_flexform';
+$TCA['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature]='layout,select_key';
+if (TYPO3_MODE == 'BE') {
+	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses'][$pluginSignature . '_wizicon'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Resources/Private/Php/class.' . $_EXTKEY . '_wizicon.php';
+}
+
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Forum');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_forum_domain_model_board', 'EXT:forum/Resources/Private/Language/locallang_csh_tx_forum_domain_model_board.xlf');

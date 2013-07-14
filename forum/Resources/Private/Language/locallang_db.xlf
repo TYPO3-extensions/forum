@@ -3,7 +3,12 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2013-07-10T20:14:04Z" product-name="forum">
 		<header/>
 		<body>
-
+			<trans-unit id="tx_forum.CeTitle">
+				<source>Forum Plugin</source>
+			</trans-unit>
+			<trans-unit id="tx_forum.CeDescription">
+				<source>Displays the Boards, Threads and Postings of your forum.</source>
+			</trans-unit>
 			<trans-unit id="tx_forum_domain_model_board">
 				<source>Board</source>
 			</trans-unit>
