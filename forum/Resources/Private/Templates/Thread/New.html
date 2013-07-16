@@ -1,0 +1,11 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+  <h1>Create Thread in {board.title}</h1>
+  <f:debug title="abc">{user}</f:debug>
+  <f:form action="create" name="newThread" object="{newThread}" arguments="{board: board}">
+    <f:form.textfield property="title" value="" />
+    <f:form.textarea cols="20" rows="5" name="firstPost" value="" />
+    <f:form.submit name="submit" value="Create Thread" />
+  </f:form>
+</f:section>

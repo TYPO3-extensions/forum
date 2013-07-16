@@ -1,0 +1,22 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+  <h1>Boardlist</h1>
+
+  <div class="list_boards">
+    <!-- Right now only 2 steps -->
+    <f:for each="{boards}" as="board">
+    <div class="listentry">
+      <h2>
+        <f:link.action action="show" arguments="{board: board}">{board.title}</f:link.action>
+      </h2>
+      <f:for each="{board.boards}" as="subboard">
+        <div class="listentry">
+          <h3>
+            <f:link.action action="show" arguments="{board: subboard}">{subboard.title}</f:link.action>
+          </h3>
+        </div>
+      </f:for>
+    </f:for>
+    </div>
+</f:section>

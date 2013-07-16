@@ -33,7 +33,7 @@ namespace BBNetz\Forum\Controller;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class BoardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class BoardController extends \BBNetz\Forum\Controller\DefaultController {
 
 	/**
 	 * boardRepository
@@ -49,7 +49,7 @@ class BoardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @return void
 	 */
 	public function listAction() {
-		$boards = $this->boardRepository->findAll();
+		$boards = $this->boardRepository->findTopLevel();
 		$this->view->assign('boards', $boards);
 	}
 
@@ -61,6 +61,7 @@ class BoardController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 */
 	public function showAction(\BBNetz\Forum\Domain\Model\Board $board) {
 		$this->view->assign('board', $board);
+		$this->view->assign('user', $this->getCurrentUser());
 	}
 
 }

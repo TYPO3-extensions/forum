@@ -33,17 +33,15 @@ namespace BBNetz\Forum\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class BoardRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
-
-	/**
-	 * Finds first Level of Boards
-	 *
-	 * @return QueryResult
-	 */
-	public function findTopLevel() {
-		$query = $this->createQuery();
-		$object = $query->matching($query->equals('board', '0'))->execute();
-		return $object;
+class ForumUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+	
+	public function initializeObject() {
+		/** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
+		$querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+		// don't add the pid constraint
+		$querySettings->setRespectStoragePage(FALSE);
+		$this->setDefaultQuerySettings($querySettings);
 	}
+
 }
 ?>

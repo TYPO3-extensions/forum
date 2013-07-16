@@ -3,10 +3,9 @@ if (!defined('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$extensionName=t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
+$extensionName=\TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($_EXTKEY);
 
-// Group Travel
-Tx_Extbase_Utility_Extension::registerPlugin($_EXTKEY, 'main', 'LLL:EXT:forum/Resources/Private/Language/locallang_db.xlf:tx_forum.CeTitle' );
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin($_EXTKEY, 'main', 'LLL:EXT:forum/Resources/Private/Language/locallang_db.xlf:tx_forum.CeTitle' );
 $pluginSignature=\strtolower($extensionName).'_main';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature]='pi_flexform';
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature]='layout,select_key';

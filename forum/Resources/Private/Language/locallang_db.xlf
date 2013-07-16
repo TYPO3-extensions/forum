@@ -21,6 +21,15 @@
 			<trans-unit id="tx_forum_domain_model_board.threads">
 				<source>Threads</source>
 			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_board.all_threads">
+				<source>All Threads</source>
+			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_board.posts">
+				<source>Posts</source>
+			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_board.all_posts">
+				<source>All Posts</source>
+			</trans-unit>
 
 			<trans-unit id="tx_forum_domain_model_thread">
 				<source>Thread</source>

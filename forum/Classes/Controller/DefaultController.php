@@ -1,5 +1,5 @@
 <?php
-namespace BBNetz\Forum\Domain\Repository;
+namespace BBNetz\Forum\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -33,17 +33,15 @@ namespace BBNetz\Forum\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class BoardRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class DefaultController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
-	 * Finds first Level of Boards
+	 * getsTheCurrentLoggedInUser
 	 *
-	 * @return QueryResult
+	 * @return \BBNetz\Forum\Domain\Model\ForumUser
 	 */
-	public function findTopLevel() {
-		$query = $this->createQuery();
-		$object = $query->matching($query->equals('board', '0'))->execute();
-		return $object;
+	protected function getCurrentUser() {
+		$user = $this->forumUserRepository->findOneByUid($GLOBALS['TSFE']->fe_user->user['uid']);
+		return $user;
 	}
 }
-?>

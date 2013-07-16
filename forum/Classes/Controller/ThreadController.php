@@ -33,7 +33,14 @@ namespace BBNetz\Forum\Controller;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class ThreadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class ThreadController extends \BBNetz\Forum\Controller\DefaultController {
+	/**
+	 * persistenceManager
+	 *
+	 * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
+	 * @inject
+	 */
+	protected $persistenceManager;
 
 	/**
 	 * threadRepository
@@ -44,6 +51,14 @@ class ThreadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	protected $threadRepository;
 
 	/**
+	 * forumUserRepository
+	 *
+	 * @var \BBNetz\Forum\Domain\Repository\ForumUserRepository
+	 * @inject
+	 */
+	protected $forumUserRepository;
+
+	/**
 	 * action show
 	 *
 	 * @param \BBNetz\Forum\Domain\Model\Thread $thread
@@ -51,63 +66,70 @@ class ThreadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	 */
 	public function showAction(\BBNetz\Forum\Domain\Model\Thread $thread) {
 		$this->view->assign('thread', $thread);
+		$this->view->assign('user', $this->getCurrentUser());
 	}
 
 	/**
 	 * action new
 	 *
+	 * @param \BBNetz\Forum\Domain\Model\Board $board
 	 * @param \BBNetz\Forum\Domain\Model\Thread $newThread
+	 * @param string $firstPost
+	 * @dontvalidate $firstPost
 	 * @dontvalidate $newThread
 	 * @return void
 	 */
-	public function newAction(\BBNetz\Forum\Domain\Model\Thread $newThread = NULL) {
+	public function newAction(\BBNetz\Forum\Domain\Model\Board $board, \BBNetz\Forum\Domain\Model\Thread $newThread = NULL, $firstPost = NULL) {
+		if($this->getCurrentUser() == NULL) $this->redirect('list', 'Board');
+		$this->view->assign('user', $this->getCurrentUser());
+		$this->view->assign('board', $board);
 		$this->view->assign('newThread', $newThread);
+		$this->view->assign('firstPost', $firstPost);
 	}
 
 	/**
 	 * action create
 	 *
+	 * @param \BBNetz\Forum\Domain\Model\Board $board
 	 * @param \BBNetz\Forum\Domain\Model\Thread $newThread
+	 * @param string $firstPost
+	 * @dontvalidate $firstPost
 	 * @return void
 	 */
-	public function createAction(\BBNetz\Forum\Domain\Model\Thread $newThread) {
-		$this->threadRepository->add($newThread);
-		$this->flashMessageContainer->add('Your new Thread was created.');
-		$this->redirect('list');
+	public function createAction(\BBNetz\Forum\Domain\Model\Board $board, \BBNetz\Forum\Domain\Model\Thread $newThread, $firstPost = NULL) {
+		if($this->getCurrentUser() == NULL) $this->redirect('list', 'Board');
+		$post = $this->objectManager->get('\\BBNetz\\Forum\\Domain\Model\\Post');
+		$post->setHeader($newThread->getTitle());
+		$post->unrenderedText($firstPost);
+		$post->renderedText($firstPost);
+		$post->setUser($this->getCurrentUser());
+		$newThread->addPost($post);
+		$board->addThread($newThread);
+		$this->persistenceManager->persistAll();
+		$this->redirect('show', Null, Null, array('thread', $newThread));
 	}
 
 	/**
-	 * action edit
+	 * action answer
 	 *
 	 * @param \BBNetz\Forum\Domain\Model\Thread $thread
+	 * @dontvalidate $post
 	 * @return void
 	 */
-	public function editAction(\BBNetz\Forum\Domain\Model\Thread $thread) {
-		$this->view->assign('thread', $thread);
+	public function answerAction(\BBNetz\Forum\Domain\Model\Thread $thread, $post = NULL) {
+
 	}
 
 	/**
-	 * action update
+	 * action createAnswer
 	 *
 	 * @param \BBNetz\Forum\Domain\Model\Thread $thread
+	 * @param \BBNetz\Forum\Domain\Model\Post $post
+	 * 
 	 * @return void
 	 */
-	public function updateAction(\BBNetz\Forum\Domain\Model\Thread $thread) {
-		$this->threadRepository->update($thread);
-		$this->flashMessageContainer->add('Your Thread was updated.');
-		$this->redirect('list');
-	}
+	public function createAnswerAction(\BBNetz\Forum\Domain\Model\Thread $thread, \BBNetz\Forum\Domain\Model\Post $post) {
 
-	/**
-	 * action delete
-	 *
-	 * @param \BBNetz\Forum\Domain\Model\Thread $thread
-	 * @return void
-	 */
-	public function deleteAction(\BBNetz\Forum\Domain\Model\Thread $thread) {
-		$this->threadRepository->remove($thread);
-		$this->flashMessageContainer->add('Your Thread was removed.');
-		$this->redirect('list');
 	}
 
 }

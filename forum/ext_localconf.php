@@ -2,12 +2,14 @@
 if (!defined ('TYPO3_MODE'))    die ('Access denied.');
 
 Tx_Extbase_Utility_Extension::configurePlugin(
-  $_EXTKEY,
+  'BBNetz.' . $_EXTKEY,
   'main',
   array(
-    'Board' => 'list',
+    'Board' => 'list, show',
+    'Thread' => 'create, new',
   ),
   array(
     'Board' => '',
+    'Thread' => 'create',
   )
 );

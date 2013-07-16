@@ -33,7 +33,7 @@ namespace BBNetz\Forum\Controller;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class PostController extends \BBNetz\Forum\Controller\DefaultController {
 
 	/**
 	 * postRepository

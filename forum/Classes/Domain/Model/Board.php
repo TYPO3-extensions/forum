@@ -52,12 +52,34 @@ class Board extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $boards;
 
 	/**
+	 * Number of $posts
+	 *
+	 * @var int
+	 */
+	protected $posts;
+
+	/**
+	 * Number of allSub $posts
+	 *
+	 * @var int
+	 */
+	protected $allPosts;
+
+	/**
 	 * Threads of this board
 	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BBNetz\Forum\Domain\Model\Thread>
 	 * @lazy
 	 */
 	protected $threads;
+
+	/**
+	 * Number of allSubThreads
+	 * Includes unlimited children
+	 *
+	 * @var int
+	 */
+	protected $allThreads;
 
 	/**
 	 * __construct
@@ -144,6 +166,63 @@ class Board extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
+	 * Sets the amount of Posts
+	 *
+	 * @param int $posts
+	 * @return void
+	 */
+	public function setPosts($posts) {
+		$this->posts = $posts;
+	}
+
+	/**
+	 * Gets the amount of Posts
+	 *
+	 * @return int
+	 */
+	public function getPosts() {
+		return $this->posts;
+	}
+
+	/**
+	 * Sets the amount of Posts of allSubboards
+	 *
+	 * @param int $allPosts
+	 * @return void
+	 */
+	public function setAllPosts($allPosts) {
+		$this->allPosts = $allPosts;
+	}
+
+	/**
+	 * Gets the amount of Posts of allSubboards
+	 *
+	 * @return int
+	 */
+	public function getAllPosts() {
+		return $this->allPosts;
+	}
+
+	/**
+	 * Sets Number of allThreads
+	 *
+	 * @param int $allThreads
+	 * @return void
+	 */
+	public function setAllThreads($allThreads) {
+		$this->allThreads = $allThreads;
+	}
+
+	/**
+	 * Returns Number of allThreads
+	 *
+	 * @return int
+	 */
+	public function getAllThreads() {
+		return $this->allThreads
+	}
+
+	/**
 	 * Adds a Thread
 	 *
 	 * @param \BBNetz\Forum\Domain\Model\Thread $thread
@@ -151,6 +230,19 @@ class Board extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function addThread(\BBNetz\Forum\Domain\Model\Thread $thread) {
 		$this->threads->attach($thread);
+		$this->addPost(true);
+		$this->addAllThreads();
+	}
+
+	/**
+	 * Adds All Threads
+	 * Recursive if needed
+	 *
+	 * @return void
+	 */
+	public function addAllThreads() {
+		$this->allThreads++;
+		if($this->board != NULL) $this->board->addAllThreads();
 	}
 
 	/**
@@ -180,6 +272,18 @@ class Board extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setThreads(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $threads) {
 		$this->threads = $threads;
+	}
+
+	/**
+	 * Adds the PostCounter to Posts and AllPosts
+	 *
+	 * @param boolean $isDirectParent
+	 * @return void
+	 */
+	public function addPost($isDirectParent = false) {
+		if($isDirectParent) $this->posts++;
+		$this->allPosts++;
+		if($this->board != NULL) $this->board->addPost();
 	}
 
 }

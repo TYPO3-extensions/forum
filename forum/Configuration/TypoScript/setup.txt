@@ -1,0 +1,22 @@
+plugin.tx_forum {
+	view {
+		templateRootPath = {$plugin.tx_forum.view.templateRootPath}
+		partialRootPath = {$plugin.tx_forum.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_forum.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_forum.persistence.storagePid}
+	}
+	settings {
+    	indexPageTitle = {$plugin.tx_forum.settings.indexPageTitle}
+    }
+}
+
+plugin.tx_forum.persistence.classes.BBNetz\Forum\Domain\Model\ForumUser.mapping.recordType = 
+
+#lib.forum.header = TEXT
+#lib.forum.header {
+#  data = GP:tx_typo3wiki_typo3wiki|page
+#  wrap = {$plugin.tx_typo3wiki.settings.header.prefix}{DB:tx_typo3wiki_domain_model_page:|:page_title}{$plugin.tx_typo3wiki.settings.header.suffix}
+#  insertData = 1
+#}

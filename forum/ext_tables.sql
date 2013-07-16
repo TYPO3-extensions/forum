@@ -11,6 +11,9 @@ CREATE TABLE tx_forum_domain_model_board (
 	title varchar(255) DEFAULT '' NOT NULL,
 	boards int(11) unsigned DEFAULT '0' NOT NULL,
 	threads int(11) unsigned DEFAULT '0' NOT NULL,
+	all_threads int(11) unsigned DEFAULT '0' NOT NULL,
+	posts int(11) unsigned DEFAULT '0' NOT NULL,
+	all_posts int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
