@@ -6,10 +6,10 @@ Tx_Extbase_Utility_Extension::configurePlugin(
   'main',
   array(
     'Board' => 'list, show',
-    'Thread' => 'create, new',
+    'Thread' => 'create, new, show, answer, createAnswer',
   ),
   array(
     'Board' => '',
-    'Thread' => 'create',
+    'Thread' => 'create, createAnswer',
   )
 );

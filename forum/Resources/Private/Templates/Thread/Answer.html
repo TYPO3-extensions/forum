@@ -1,0 +1,12 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+  <h1>Create Answer for {thread.title}</h1>
+
+	<f:form action="createAnswer" name="newPost" object="{newPost}" arguments="{thread: thread}">
+		<f:form.textfield property="headline" value="" />
+		<f:form.textarea cols="20" rows="5" property="unrenderedText" value="" />
+		<f:form.hidden property="thread" value="{thread}" />
+		<f:form.submit name="submit" value="Answer" />
+	</f:form>
+</f:section>

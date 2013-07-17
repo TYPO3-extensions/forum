@@ -219,7 +219,7 @@ class Board extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return int
 	 */
 	public function getAllThreads() {
-		return $this->allThreads
+		return $this->allThreads;
 	}
 
 	/**

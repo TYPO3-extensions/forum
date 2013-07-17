@@ -9,6 +9,7 @@ plugin.tx_forum {
 	}
 	settings {
     	indexPageTitle = {$plugin.tx_forum.settings.indexPageTitle}
+    	showQuickReply = {$plugin.tx_forum.settings.showQuickReply}
     }
 }
 

@@ -34,13 +34,6 @@ namespace BBNetz\Forum\Controller;
  *
  */
 class ThreadController extends \BBNetz\Forum\Controller\DefaultController {
-	/**
-	 * persistenceManager
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-	 * @inject
-	 */
-	protected $persistenceManager;
 
 	/**
 	 * threadRepository
@@ -51,14 +44,6 @@ class ThreadController extends \BBNetz\Forum\Controller\DefaultController {
 	protected $threadRepository;
 
 	/**
-	 * forumUserRepository
-	 *
-	 * @var \BBNetz\Forum\Domain\Repository\ForumUserRepository
-	 * @inject
-	 */
-	protected $forumUserRepository;
-
-	/**
 	 * action show
 	 *
 	 * @param \BBNetz\Forum\Domain\Model\Thread $thread
@@ -66,7 +51,6 @@ class ThreadController extends \BBNetz\Forum\Controller\DefaultController {
 	 */
 	public function showAction(\BBNetz\Forum\Domain\Model\Thread $thread) {
 		$this->view->assign('thread', $thread);
-		$this->view->assign('user', $this->getCurrentUser());
 	}
 
 	/**
@@ -81,7 +65,6 @@ class ThreadController extends \BBNetz\Forum\Controller\DefaultController {
 	 */
 	public function newAction(\BBNetz\Forum\Domain\Model\Board $board, \BBNetz\Forum\Domain\Model\Thread $newThread = NULL, $firstPost = NULL) {
 		if($this->getCurrentUser() == NULL) $this->redirect('list', 'Board');
-		$this->view->assign('user', $this->getCurrentUser());
 		$this->view->assign('board', $board);
 		$this->view->assign('newThread', $newThread);
 		$this->view->assign('firstPost', $firstPost);
@@ -98,13 +81,15 @@ class ThreadController extends \BBNetz\Forum\Controller\DefaultController {
 	 */
 	public function createAction(\BBNetz\Forum\Domain\Model\Board $board, \BBNetz\Forum\Domain\Model\Thread $newThread, $firstPost = NULL) {
 		if($this->getCurrentUser() == NULL) $this->redirect('list', 'Board');
-		$post = $this->objectManager->get('\\BBNetz\\Forum\\Domain\Model\\Post');
+		$post = $this->objectManager->get("BBNetz\\Forum\\Domain\\Model\\Post");
 		$post->setHeader($newThread->getTitle());
-		$post->unrenderedText($firstPost);
-		$post->renderedText($firstPost);
+		$post->setUnrenderedText($firstPost);
+		$post->setRenderedText($firstPost);
 		$post->setUser($this->getCurrentUser());
 		$newThread->addPost($post);
 		$board->addThread($newThread);
+		$newThread->setBoard($board);
+		$this->threadRepository->add($newThread);
 		$this->persistenceManager->persistAll();
 		$this->redirect('show', Null, Null, array('thread', $newThread));
 	}
@@ -113,11 +98,12 @@ class ThreadController extends \BBNetz\Forum\Controller\DefaultController {
 	 * action answer
 	 *
 	 * @param \BBNetz\Forum\Domain\Model\Thread $thread
+	 * @param \BBNetz\Forum\Domain\Model\Post $Post
 	 * @dontvalidate $post
 	 * @return void
 	 */
 	public function answerAction(\BBNetz\Forum\Domain\Model\Thread $thread, $post = NULL) {
-
+		$this->view->assign('thread', $thread);
 	}
 
 	/**

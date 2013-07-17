@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_forum_domain_model_thread'] = array(
 	'ctrl' => $TCA['tx_forum_domain_model_thread']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, posts',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, board, posts',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, posts,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, board, posts,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -114,8 +114,12 @@ $TCA['tx_forum_domain_model_thread'] = array(
 			),
 		),
 		'board' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:forum/Resources/Private/Language/locallang_db.xlf:tx_forum_domain_model_thread.board',
 			'config' => array(
-				'type' => 'passthrough',
+				'type' => 'select',
+				'foreign_table' => 'tx_forum_domain_model_board',
+				//'foreign_field' => 'uid',
 			),
 		),
 	),

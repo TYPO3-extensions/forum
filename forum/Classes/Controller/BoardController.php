@@ -61,7 +61,6 @@ class BoardController extends \BBNetz\Forum\Controller\DefaultController {
 	 */
 	public function showAction(\BBNetz\Forum\Domain\Model\Board $board) {
 		$this->view->assign('board', $board);
-		$this->view->assign('user', $this->getCurrentUser());
 	}
 
 }

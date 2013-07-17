@@ -40,6 +40,9 @@
 			<trans-unit id="tx_forum_domain_model_thread.posts">
 				<source>Posts</source>
 			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_thread.board">
+				<source>Board</source>
+			</trans-unit>
 
 			<trans-unit id="tx_forum_domain_model_post">
 				<source>Post</source>

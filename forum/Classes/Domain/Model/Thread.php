@@ -52,6 +52,14 @@ class Thread extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $posts;
 
 	/**
+	 * The threads board
+	 *
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BBNetz\Forum\Domain\Model\Board>
+	 * @lazy
+	 */
+	protected $board;
+
+	/**
 	 * __construct
 	 *
 	 * @return Thread
@@ -131,6 +139,25 @@ class Thread extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setPosts(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $posts) {
 		$this->posts = $posts;
+	}
+
+	/**
+	 * Returns the board
+	 *
+	 * @return \BBNetz\Forum\Domain\Model\Board $board
+	 */
+	public function getBoard() {
+		return $this->board;
+	}
+
+	/**
+	 * Sets the board
+	 *
+	 * @param \BBNetz\Forum\Domain\Model\Board $board
+	 * @return void
+	 */
+	public function setBoard(\BBNetz\Forum\Domain\Model\Board $board) {
+		$this->board = $board;
 	}
 
 }

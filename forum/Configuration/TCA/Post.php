@@ -120,17 +120,10 @@ $TCA['tx_forum_domain_model_post'] = array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:forum/Resources/Private/Language/locallang_db.xlf:tx_forum_domain_model_post.user',
 			'config' => array(
-				'type' => 'inline',
+				'type' => 'select',
 				'foreign_table' => 'fe_users',
-				'minitems' => 0,
+				'minitems' => 1,
 				'maxitems' => 1,
-				'appearance' => array(
-					'collapseAll' => 0,
-					'levelLinksPosition' => 'top',
-					'showSynchronizationLink' => 1,
-					'showPossibleLocalizationRecords' => 1,
-					'showAllLocalizationLink' => 1
-				),
 			),
 		),
 		'thread' => array(

@@ -34,6 +34,31 @@ namespace BBNetz\Forum\Controller;
  *
  */
 class DefaultController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+	/**
+	 * forumUserRepository
+	 *
+	 * @var \BBNetz\Forum\Domain\Repository\ForumUserRepository
+	 * @inject
+	 */
+	protected $forumUserRepository;
+
+	/**
+	 * persistenceManager
+	 *
+	 * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
+	 * @inject
+	 */
+	protected $persistenceManager;
+
+	/**
+	 * Initialize view
+	 *
+	 * @return void
+	 */ 
+	public function initializeView(\TYPO3\CMS\Fluid\View\TemplateView $view) {
+		$view->assign('user', $this->getCurrentUser());
+		$view->assign('settings', $this->settings);
+	}
 
 	/**
 	 * getsTheCurrentLoggedInUser
