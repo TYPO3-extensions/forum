@@ -1,0 +1,5 @@
+plugin.tx_forum {
+	settings {
+		render.markdown = BBNetz\ForumMarkdown\Helper\Markdown
+	}
+}

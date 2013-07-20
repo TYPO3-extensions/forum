@@ -1,5 +1,11 @@
 */
 *.html
+!forum_markdown
+!forum_markdown/*
+!forum_markdown/*/*
+!forum_markdown/*/*/*
+!forum_markdown/*/*/*/*
+!forum_markdown/*/*/*/*/*
 !forum
 !forum/*
 !forum/*/*
