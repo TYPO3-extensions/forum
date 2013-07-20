@@ -30,11 +30,13 @@ namespace BBNetz\Forum\Controller;
 /**
  *
  *
+ * @package forum
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class DefaultController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class ForumUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
+
     /**
      * forumUserRepository
      *
@@ -56,13 +58,17 @@ class DefaultController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function initializeAction()
     {
+
         if (TYPO3_MODE === 'BE') {
+
             $configurationManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Configuration\\BackendConfigurationManager');
             $this->settings = $configurationManager->getConfiguration(
                 $this->request->getControllerExtensionName(),
                 $this->request->getPluginName()
             );
+
         }
+
     }
 
     /**
@@ -72,18 +78,56 @@ class DefaultController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function initializeView(\TYPO3\CMS\Fluid\View\TemplateView $view)
     {
-        $view->assign('user', $this->getCurrentUser());
         $view->assign('settings', $this->settings);
     }
 
     /**
-     * getsTheCurrentLoggedInUser
+     * action list
      *
-     * @return \BBNetz\Forum\Domain\Model\ForumUser
+     * @return void
+     * @todo show only valid forumUsers
      */
-    protected function getCurrentUser()
+    public function listAction()
     {
-        $user = $this->forumUserRepository->findOneByUid($GLOBALS['TSFE']->fe_user->user['uid']);
-        return $user;
+        /*
+                $forumUsers = $this->forumUserRepository->findAll();
+                $this->view->assign('forumUsers', $forumUsers);
+                */
     }
+
+    /**
+     * action show
+     *
+     * @param \BBNetz\Forum\Domain\Model\ForumUser $forumUser
+     * @return void
+     */
+    public function showAction(\BBNetz\Forum\Domain\Model\ForumUser $forumUser)
+    {
+        $this->view->assign('forumUser', $forumUser);
+    }
+
+    /**
+     * action edit
+     *
+     * @param \BBNetz\Forum\Domain\Model\ForumUser $forumUser
+     * @return void
+     */
+    public function editAction(\BBNetz\Forum\Domain\Model\ForumUser $forumUser)
+    {
+        $this->view->assign('forumUser', $forumUser);
+    }
+
+    /**
+     * action update
+     *
+     * @param \BBNetz\Forum\Domain\Model\ForumUser $forumUser
+     * @return void
+     */
+    public function updateAction(\BBNetz\Forum\Domain\Model\ForumUser $forumUser)
+    {
+        $this->forumUserRepository->update($forumUser);
+        $this->flashMessageContainer->add('Your ForumUser was updated.');
+        $this->redirect('list');
+    }
+
 }

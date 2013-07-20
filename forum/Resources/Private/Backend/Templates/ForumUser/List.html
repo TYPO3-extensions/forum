@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
+
+<f:layout name="Default"/>
+
+<f:section name="main">
+    <h1>Frontend User</h1>
+
+    <hr/>
+    <div class="list_boards">
+        <f:be.tableList tableName="fe_users"
+                        fieldList="{0:'name',1:'uid',2:'hidden',3:'usergroup'}"
+                        storagePid="{settings.persistence.userStoragePid}"
+                        levels="4"
+                        enableClickMenu="true"
+                        clickTitleMode="info"
+                        alternateBackgroundColors="true"
+                />
+
+    </div>
+
+
+</f:section>

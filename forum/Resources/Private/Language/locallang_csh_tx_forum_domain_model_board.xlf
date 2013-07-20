@@ -13,6 +13,21 @@
 			<trans-unit id="threads.description">
 				<source>Threads of this board</source>
 			</trans-unit>
+			<trans-unit id="perms_read.description">
+				<source>FE Usergroup allowed to read (if none set, all allowed)</source>
+			</trans-unit>
+			<trans-unit id="perms_write.description">
+				<source>FE Usergroup allowed to write (if none set, all allowed)</source>
+			</trans-unit>
+			<trans-unit id="admin_group.description">
+				<source>FE Usergroup with Admin Status for this board</source>
+			</trans-unit>
+			<trans-unit id="moderator_group.description">
+				<source>FE User Group moderating this board</source>
+			</trans-unit>
+			<trans-unit id="board.description">
+				<source>parent board</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

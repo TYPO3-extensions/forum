@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
+
+{namespace forum=BBNetz\Forum\ViewHelpers}
+<f:layout name="Default"/>
+
+<f:section name="main">
+    <h1>
+        <f:translate key="tx_forum_domain_model_board.tree">Board Tree</f:translate>
+    </h1>
+
+    <div class="list_boards">
+        <table class="board-tree typo3-dblist">
+            <thead>
+            <tr class="db-list-header t3-row-header">
+                <th class="board-title" colspan="2">
+                    <f:count>{tree}</f:count>
+                    Boards
+                </th>
+                <th class="board-uid" colspan="2"></th>
+            </tr>
+            <tr class="db-list-header c-headline">
+                <th></th>
+                <th class="board-title">
+                    Board Title
+                </th>
+                <th class="board-uid">Number of Threads</th>
+                <th>edit</th>
+            </tr>
+            </thead>
+            <tbody>
+            <f:render section="treeTable" arguments="{items:boards,level:0}"/>
+            </tbody>
+        </table>
+    </div>
+
+    {boardsList}
+
+</f:section>
+
+<f:section name="treeTable">
+
+    <f:for each="{items}" as="item" iteration="lines">
+        <tr class="db-list-normal level-{level}">
+            <td class="tree-graph">
+                <forum:be.link.clickMenu item="{item}" treeLevel="{level}" draw="TRUE" iter="{lines}"
+                                         parentIsLast="{last}">
+                    <f:image src="{item.icon}" alt="{item.title}" maxWidth="18" maxHeight="18"/>
+                </forum:be.link.clickMenu>
+            </td>
+            <td class="board-title">
+                {item.title}
+            </td>
+            <td class="board-uid">{item.allThreads}</td>
+            <td class="board-edit">
+
+                <forum:be.link.editLink item="{item}">
+                    <span class="t3-icon t3-icon-actions t3-icon-actions-document t3-icon-document-open">&nbsp;</span>
+                </forum:be.link.editLink>
+            </td>
+        </tr>
+        <f:if condition="{item.boards}">
+            <f:render section="treeTable" arguments="{items:item.boards,
+            level:'{level -> f:cObject(typoscriptObjectPath:\'lib.fluidMath\',data:\'{level}+1\')}',
+            last:'{parentIsLast:lines.isLast,before:\'{last}\'}' }"/>
+        </f:if>
+    </f:for>
+</f:section>
+

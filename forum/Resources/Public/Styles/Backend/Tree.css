@@ -1,0 +1,118 @@
+.list-boards {
+    padding: 0.5em;
+    border: 1px solid grey;
+    margin: 1em 0;
+}
+
+ul.board-tree {
+    list-style-position: inside;
+    list-style-image: url('../../Icons/tx_forum_domain_model_board.gif');
+    font-weight: bold;
+    font-size: 118%;
+    line-height: 1.2em;
+}
+
+ul.board-tree li {
+    margin-left: 0;
+    font-size: 1em;
+    position: relative;
+}
+
+ul.board-tree li ul {
+    left: -18px;
+    background: repeat-y 0 0 url('../../../../../../../typo3/sysext/t3skin/icons/gfx/ol/line.gif');
+    font-size: 96%;
+}
+
+ul.board-tree li ul.board-tree li {
+    padding-left: 18px;
+    background: no-repeat left top url('../../../../../../../typo3/sysext/t3skin/icons/gfx/ol/joinbottom.gif');
+}
+
+#typo3-inner-docbody table.typo3-dblist, table.board-tree, table.board_tree, table.board-tree .db-list-normal {
+    font-size: 1em !important;
+}
+
+table.board-tree {
+    border-spacing: 0;
+    empty-cells: show;
+}
+
+table.board-tree td {
+    padding: 0.5em;
+    vertical-align: middle;
+}
+
+.board-tree .board-uid {
+    text-align: right;
+    max-width: 25%;
+    padding-right: 1em;
+}
+
+table.board-tree td.tree-graph {
+    padding: 0;
+    margin: 0;
+    width: 10em;
+    max-width: 40%;
+}
+
+table.board-tree td.tree-graph img {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+table.board-tree td.board-title {
+    min-width: 12em;
+    max-width: 50%;
+}
+
+table.board-tree th {
+    font-size: 0.92em;
+    font-weight: 600;
+    padding: 0.5em;
+    vertical-align: middle;
+}
+
+table.board-tree th.board-title {
+    vertical-align: middle;
+}
+
+table.typo3-dblist tr td,
+table.typo3-dblist tbody > tr > td {
+    font-size: 1em !important;
+}
+
+table.typo3-CSM {
+    font-size: 1em !important;
+}
+
+ul.board-tree {
+    width: 99%;
+}
+
+ul.board-tree li {
+    position: relative;
+    width: 99%;
+}
+
+ul.board-tree li .board-info {
+    font-weight: normal;
+    font-size: smaller;
+    position: absolute;
+    right: 1em;
+    min-width: 30%;
+    max-width: 60%;
+    margin: 0 1px;
+}
+
+.board-tree .threads-info {
+    color: #669966;
+}
+
+.tree-vertical-line, .tree-no-line,
+.tree-join, .tree-join-bottom {
+    width: 18px;
+    height: 100%;
+    margin: 0;
+}

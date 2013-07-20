@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
+
+<f:layout name="Default"/>
+
+<f:section name="main">
+    <h1>Backend Boards Overview</h1>
+
+    <p>
+        <f:count>{boards}</f:count>
+        Foren/Boards aktiv
+    </p>
+
+    <hr/>
+    <div class="list_boards">
+        <f:be.tableList tableName="tx_forum_domain_model_board"
+                        fieldList="{2:'hidden',3:'board',4:'allThreads',5:'allPosts'}"
+                        levels="4"
+                        enableClickMenu="true"
+                        clickTitleMode="info"
+                        alternateBackgroundColors="true"
+                />
+        <f:be.tableList tableName="fe_groups" fieldList="{0:'usergroup'}" levels="4"
+                        storagePid="{settings.persistence.userStoragePid}"/>
+        <f:be.tableList tableName="fe_users" fieldList="{0:'usergroup'}" levels="4"
+                        storagePid="{settings.persistence.userStoragePid}"/>
+    </div>
+
+
+</f:section>
+
+

@@ -9,11 +9,16 @@ CREATE TABLE tx_forum_domain_model_board (
 	board int(11) unsigned DEFAULT '0' NOT NULL,
 
 	title varchar(255) DEFAULT '' NOT NULL,
+	icon text,
 	boards int(11) unsigned DEFAULT '0' NOT NULL,
 	threads int(11) unsigned DEFAULT '0' NOT NULL,
 	all_threads int(11) unsigned DEFAULT '0' NOT NULL,
 	posts int(11) unsigned DEFAULT '0' NOT NULL,
 	all_posts int(11) unsigned DEFAULT '0' NOT NULL,
+	perms_read int(11) unsigned DEFAULT '0',
+	perms_write int(11) unsigned DEFAULT '0',
+	admin_group int(11) unsigned DEFAULT '0',
+	moderator_group int(11) unsigned DEFAULT '0',
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -114,6 +119,16 @@ CREATE TABLE fe_users (
 	tx_extbase_type varchar(255) DEFAULT '' NOT NULL,
 
 );
+
+#
+# Table structure for table 'fe_groups'
+#
+CREATE TABLE fe_groups (
+
+	tx_extbase_type varchar(255) DEFAULT '' NOT NULL,
+
+);
+
 
 #
 # Table structure for table 'tx_forum_domain_model_board'

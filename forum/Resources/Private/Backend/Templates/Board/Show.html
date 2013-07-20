@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+      xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
+
+<f:layout name="Default"/>
+
+<f:section name="main">
+    <h1>{board.title}</h1>
+
+    <f:if condition="{user}">
+        <f:link.action action="new" arguments="{board: board}" controller="Thread">Create New</f:link.action>
+    </f:if>
+
+    <div class="list_threads">
+        <!-- subboards -->
+        <f:for each="{board.boards}" as="subboard">
+            <div class="listentry board">
+                <f:link.action action="show" arguments="{board: subboard}">{subboard.title}</f:link.action>
+            </div>
+        </f:for>
+
+        <!-- threads -->
+        <f:for each="{board.threads}" as="thread">
+            <div class="listentry thread">
+                <f:link.action action="show" controller="Thread" arguments="{thread: thread}">{thread.title}
+                </f:link.action>
+            </div>
+        </f:for>
+
+    </div>
+
+    <f:if condition="{user}">
+        <f:link.action action="new" arguments="{board: board}" controller="Thread">Create New</f:link.action>
+    </f:if>
+
+
+</f:section>
