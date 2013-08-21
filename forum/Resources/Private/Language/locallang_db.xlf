@@ -12,11 +12,15 @@
 			<trans-unit id="tx_forum_domain_model_board">
 				<source>Board</source>
 			</trans-unit>
-			<trans-unit id="tx_forum_domain_model_board.title">
+
+		    <trans-unit id="tx_forum_domain_model_board.title">
 				<source>Title</source>
 			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_board.board">
+				<source>Parent Board (if any)</source>
+			</trans-unit>
 			<trans-unit id="tx_forum_domain_model_board.boards">
-				<source>Boards</source>
+				<source>Daughter Boards (if any)</source>
 			</trans-unit>
 			<trans-unit id="tx_forum_domain_model_board.threads">
 				<source>Threads</source>
@@ -67,7 +71,9 @@
 			<trans-unit id="fe_users.tx_extbase_type.Tx_Forum_ForumUser">
 				<source>Forum ForumUser</source>
 			</trans-unit>
-			
+
+
+
 		</body>
 	</file>
 </xliff>

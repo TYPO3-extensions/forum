@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	  xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
+
+<f:layout name="Default" />
+
+<f:section name="main">
+  <h1><f:translate key="tx_forum_domain_model_board.list">Board List</f:translate></h1>
+
+  <div class="list-boards">
+
+      <f:render section="tree" arguments="{items:boards}" />
+
+   </div>
+   <br />
+
+</f:section>
+
+<f:section name="tree">
+    <ul class="board-tree">
+        <f:for each="{items}" as="item">
+            <li>
+                {item.title}
+                <f:if condition="{item.boards}">
+                    <f:render section="tree" arguments="{items:item.boards}" />
+                </f:if>
+            </li>
+        </f:for>
+    </ul>
+</f:section>

@@ -50,6 +50,19 @@ class DefaultController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 */
 	protected $persistenceManager;
 
+    /**
+     * @return void
+     */
+    public function initializeAction() {
+        if(TYPO3_MODE === 'BE') {
+            $configurationManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Configuration\\BackendConfigurationManager');
+            $this->settings = $configurationManager->getConfiguration(
+                $this->request->getControllerExtensionName(),
+                $this->request->getPluginName()
+            );
+        }
+    }
+
 	/**
 	 * Initialize view
 	 *
@@ -60,7 +73,7 @@ class DefaultController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		$view->assign('settings', $this->settings);
 	}
 
-	/**
+    /**
 	 * getsTheCurrentLoggedInUser
 	 *
 	 * @return \BBNetz\Forum\Domain\Model\ForumUser

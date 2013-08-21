@@ -9,6 +9,7 @@ CREATE TABLE tx_forum_domain_model_board (
 	board int(11) unsigned DEFAULT '0' NOT NULL,
 
 	title varchar(255) DEFAULT '' NOT NULL,
+	icon text,
 	boards int(11) unsigned DEFAULT '0' NOT NULL,
 	threads int(11) unsigned DEFAULT '0' NOT NULL,
 	all_threads int(11) unsigned DEFAULT '0' NOT NULL,

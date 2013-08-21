@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_forum_domain_model_board'] = array(
 	'ctrl' => $TCA['tx_forum_domain_model_board']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, boards, threads, all_threads, posts, all_posts',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, icon, board, boards, threads, all_threads, posts, all_posts',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, boards, threads, all_threads, posts, all_posts,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, icon, board, boards, threads, all_threads, posts, all_posts,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -96,6 +96,19 @@ $TCA['tx_forum_domain_model_board'] = array(
 				'eval' => 'trim,required'
 			),
 		),
+        'icon' => array(
+            'exclude' => 0,
+            'label' => 'LLL:EXT:forum/Resources/Private/Language/locallang_db.xlf:tx_forum_domain_model_board.icon',
+            'config' => array(
+                'type' => 'group',
+                'internal_type' => 'file',
+                'uploadfolder' => 'uploads/tx_forum',
+                'show_thumbs' => 1,
+                'size' => 5,
+                'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
+                'disallowed' => '',
+            ),
+        ),
 		'boards' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:forum/Resources/Private/Language/locallang_db.xlf:tx_forum_domain_model_board.boards',
@@ -134,34 +147,56 @@ $TCA['tx_forum_domain_model_board'] = array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:forum/Resources/Private/Language/locallang_db.xlf:tx_forum_domain_model_board.all_threads',
 			'config' => array(
-				'type' => 'input',
+				'type' => 'none',
 				'size' => 30,
-				'eval' => 'trim,required'
+//				'eval' => 'trim,required'
 			),
 		),
 		'posts' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:forum/Resources/Private/Language/locallang_db.xlf:tx_forum_domain_model_board.posts',
 			'config' => array(
-				'type' => 'input',
+				'type' => 'none',
 				'size' => 30,
-				'eval' => 'trim,required'
+//				'eval' => 'trim,required'
 			),
 		),
 		'all_posts' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:forum/Resources/Private/Language/locallang_db.xlf:tx_forum_domain_model_board.all_posts',
 			'config' => array(
-				'type' => 'input',
+//                'type' => 'input',
+                'type' => 'none',
 				'size' => 30,
-				'eval' => 'trim,required'
+//				'eval' => 'trim,required'
 			),
 		),
 		'board' => array(
-			'config' => array(
-				'type' => 'passthrough',
-			),
+            'exclude' => 0,
+            'label' => 'LLL:EXT:forum/Resources/Private/Language/locallang_db.xlf:tx_forum_domain_model_board.board',
+
+            'config' => array(
+                'type' => 'select',
+                'renderMode' => 'tree',
+                'foreign_table' => 'tx_forum_domain_model_board',
+                'maxitems'      => 1,
+                'size' => 5,
+                'autoSizeMax' => 5,
+                'treeConfig' => array(
+                    'parentField' => 'board',
+                    'childrenField' => 'boards',
+                    'appearance' => array(
+                        'expandAll' => true,
+                        'showHeader' => true,
+//                        'levelLinksPosition' => 'top',
+//                        'showSynchronizationLink' => 1,
+//                        'showPossibleLocalizationRecords' => 1,
+//                        'showAllLocalizationLink' => 1
+                    ),
+                ),
+            ),
 		),
+
 	),
 );
 

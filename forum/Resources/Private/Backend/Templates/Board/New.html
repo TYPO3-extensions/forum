@@ -1,0 +1,18 @@
+<f:layout name="Default" />
+
+This template displays a NEW form for the current domain object.
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+    <h1>New Board</h1>
+
+    <f:flashMessages />
+
+    <f:render partial="FormErrors" arguments="{object:Board}"/>
+
+    <f:form action="create"  name="newBoard" object="{newBoard}">
+        <f:render partial="Board/FormFields" arguments="{boards:boards}"/>
+        <f:form.submit value="Create new" />
+    </f:form>
+</f:section>

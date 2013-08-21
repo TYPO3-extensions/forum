@@ -1,0 +1,13 @@
+<label for="title">
+	<f:translate key="tx_forum_domain_model_board.title">Board Title</f:translate> <span class="required">(required)</span>
+</label>: <f:form.textfield property="title" /><br />
+<label for="icon">
+    <f:translate key="tx_forum_domain_model_board.icon">Board Icon</f:translate>
+</label>:  <f:form.upload property="icon" /> <br />
+<f:form.checkbox property="hidden" value="true" /> <label for="hidden">
+    <f:translate key="tx_forum_domain_model_board.hidden">Hide board</f:translate>
+</label><br />
+<label for="board">
+    <f:translate key="tx_forum_domain_model_board.parent">Choose parent board</f:translate>
+</label>: <f:form.select name="newBoard[board]" options="{boards}" optionValueField="uid" optionLabelField="title" prependOptionLabel="none"/>
+<br />php

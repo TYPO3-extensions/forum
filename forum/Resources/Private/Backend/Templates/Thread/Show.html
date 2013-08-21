@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	  xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
+
+<f:layout name="Default" />
+
+<f:section name="main">
+  <h1>{thread.title}</h1>
+
+  <f:if condition="{user}">
+    <f:link.action action="answer" arguments="{thread: thread}">Create Answer</f:link.action>
+  </f:if>
+
+  <div class="list_posts">
+    <!-- subboards -->
+    <f:for each="{thread.posts}" as="post">
+      <div class="listentry posts">
+        <div class="title">{post.header}</div>
+        <div class="text">{post.renderedText}</div>
+      </div>
+    </f:for>
+  </div>
+
+  <f:if condition="{settings.showQuickReply}">
+    <f:render partial="Thread/QuickReply" arguments="{thread: thread}" />
+  </f:if>
+
+  <f:if condition="{user}">
+    <f:link.action action="answer" arguments="{thread: thread}">Create Answer</f:link.action>
+  </f:if>
+
+</f:section>

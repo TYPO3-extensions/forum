@@ -17,3 +17,9 @@
 !forum/*/*/*/*/*/*/*/*
 !forum/*/*/*/*/*/*/*/*/*
 !.gitignore
+nbproject
+.svn
+.idea
+.DS_Store
+*.swp
+.gitignore

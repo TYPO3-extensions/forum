@@ -132,4 +132,31 @@ $TCA['fe_users']['types']['Tx_Forum_ForumUser']['showitem'] = $TCA['fe_users']['
 $TCA['fe_users']['types']['Tx_Forum_ForumUser']['showitem'] .= ',--div--;LLL:EXT:forum/Resources/Private/Language/locallang_db.xlf:tx_forum_domain_model_forumuser,';
 $TCA['fe_users']['types']['Tx_Forum_ForumUser']['showitem'] .= '';
 
+## Backend Module #49556
+
+if (TYPO3_MODE === 'BE') {
+
+	/**
+	 * Registers a Backend Module
+	 */
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+		'BBNetz.' . $_EXTKEY,
+		'web',	 // Make module a submodule of 'web'
+		'admin',	// Submodule key
+		'after:list',						// Position
+		array(
+            'Backend' => 'index, tree, countThreads, doNothing',
+            'ForumUser' => 'list, show, edit, update',
+            'Board' => 'list, show, create, new, edit, update, hide',
+            'Thread' => 'list', /// , show, new, create, answer, createAnswer
+        ),
+		array(
+			'access' => 'user,group',
+			'icon'   => 'EXT:' . $_EXTKEY . '/ext_icon.gif',
+			'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mod.xlf',
+		)
+	);
+
+}
+
 ?>

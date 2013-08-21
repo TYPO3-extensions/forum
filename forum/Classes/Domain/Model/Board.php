@@ -43,6 +43,20 @@ class Board extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	protected $title;
 
+    /**
+     * icon symbolizing this board
+     *
+     * @var \string
+     */
+    protected $icon;
+
+    /**
+     * hidden, but not deleted board (to be reactivated)
+     *
+     * @var boolean
+     */
+    protected $hidden;
+
 	/**
 	 * Sub-boards of this board
 	 *
@@ -51,6 +65,14 @@ class Board extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	protected $boards;
 
+    /**
+     * The parent board
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BBNetz\Forum\Domain\Model\Board>
+     * @lazy
+     */
+    protected $board;
+
 	/**
 	 * Number of $posts
 	 *
@@ -58,7 +80,7 @@ class Board extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	protected $posts;
 
-	/**
+     /**
 	 * Number of allSub $posts
 	 *
 	 * @var int
@@ -103,7 +125,6 @@ class Board extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		 * You may modify the constructor of this class instead
 		 */
 		$this->boards = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		
 		$this->threads = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
@@ -125,6 +146,32 @@ class Board extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function setTitle($title) {
 		$this->title = $title;
 	}
+
+    /**
+     * Returns the icon
+     *
+     * @return \string $icon
+     */
+    public function getIcon() {
+        if(is_null($this->icon) || empty($this->icon)) {
+            $table = 'tx_forum_domain_model_board';
+            $defaultIcon = $GLOBALS['TCA'][$table]['ctrl']['iconfile'] ?
+                $GLOBALS['TCA'][$table]['ctrl']['iconfile'] : \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('forum') . 'Resources/Public/Icons/'.$table . '.gif';
+            $this->setIcon($defaultIcon);
+        }
+
+        return $this->icon;
+    }
+
+    /**
+     * Sets the icon
+     *
+     * @param \string $icon
+     * @return void
+     */
+    public function setIcon($icon) {
+        $this->icon = $icon;
+    }
 
 	/**
 	 * Adds a Board
@@ -165,6 +212,55 @@ class Board extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->boards = $boards;
 	}
 
+    /**
+     * Sets parent
+     *
+     * @param \BBNetz\Forum\Domain\Model\Board $board
+     * @return void
+     */
+    public function setParent(\BBNetz\Forum\Domain\Model\Board $board) {
+        $board->addBoard($this);
+        $this->board = $board;
+    }
+
+    /**
+     * Sets parent board
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\BBNetz\Forum\Domain\Model\Board> $board
+     * @return void
+     * @todo    problem with property mapper?
+     */
+    public function setBoard($board) {
+/*
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump(array(
+            __METHOD__ => __LINE__,
+            'type' => gettype($board),
+            'class' => is_object($board) ? get_class($board) : $board,
+            'info' => $board->getInfo(),
+            'array' => $board->toArray(),
+        ));*/
+        $this->board = $board;
+//        $this->setParent($board->current());
+    }
+
+
+    /**
+     * Get parent
+     *
+     * @return
+     */
+    public function getParent() {
+         return $this->board;
+    }
+
+    /**
+     * Get parent board
+     *
+      * @return \BBNetz\Forum\Domain\Model\Board $board
+     */
+    public function getBoard() {
+        $this->getParent();
+    }
 	/**
 	 * Sets the amount of Posts
 	 *
@@ -221,6 +317,44 @@ class Board extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function getAllThreads() {
 		return $this->allThreads;
 	}
+
+    /**
+     * Returns the hidden status
+     *
+     * @return boolean $hidden
+     */
+    public function isHidden() {
+        return $this->hidden;
+    }
+
+    /**
+     * Returns the hidden status
+     *
+     * @return boolean $hidden
+     */
+    public function getHidden() {
+        return $this->isHidden();
+    }
+
+    /**
+     * Hide or unhide the board
+     *
+     * @param boolean $hidden
+     * @return void
+     */
+    public function setHidden($hidden) {
+        $this->hidden = $hidden;
+    }
+
+    /**
+     * Hide or unhide the board
+     *
+     * @param boolean $hidden
+     * @return void
+     */
+    public function hide($hidden=TRUE) {
+        $this->setHidden($hidden);
+    }
 
 	/**
 	 * Adds a Thread

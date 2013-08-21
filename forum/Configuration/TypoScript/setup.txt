@@ -6,6 +6,7 @@ plugin.tx_forum {
 	}
 	persistence {
 		storagePid = {$plugin.tx_forum.persistence.storagePid}
+		userStoragePid = {$plugin.tx_forum.persistence.userStoragePid}
 	}
 	settings {
     	indexPageTitle = {$plugin.tx_forum.settings.indexPageTitle}
@@ -21,3 +22,21 @@ plugin.tx_forum.persistence.classes.BBNetz\Forum\Domain\Model\ForumUser.mapping.
 #  wrap = {$plugin.tx_typo3wiki.settings.header.prefix}{DB:tx_typo3wiki_domain_model_page:|:page_title}{$plugin.tx_typo3wiki.settings.header.suffix}
 #  insertData = 1
 #}
+
+
+### Backend Module
+module.tx_forum < plugin.tx_forum
+module.tx_forum {
+	view {
+		templateRootPath = {$module.tx_forum.view.templateRootPath}
+		partialRootPath = {$module.tx_forum.view.partialRootPath}
+		layoutRootPath = {$module.tx_forum.view.layoutRootPath}
+	}
+
+}
+
+lib.fluidMath = TEXT
+lib.fluidMath {
+    current = 1
+    prioriCalc = 1
+}

@@ -7,8 +7,20 @@
 			<trans-unit id="tx_forum_domain_model_board">
 				<source>A typically forum board</source>
 			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_board.single">
+				<source>board</source>
+			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_board.plural">
+				<source>boards</source>
+			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_board.list">
+				<source>All our boards</source>
+			</trans-unit>
 			<trans-unit id="tx_forum_domain_model_board.title">
 				<source>The boards title</source>
+			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_board.parent">
+				<source>Parent board</source>
 			</trans-unit>
 			<trans-unit id="tx_forum_domain_model_board.boards">
 				<source>Sub-boards of this board</source>
@@ -16,7 +28,12 @@
 			<trans-unit id="tx_forum_domain_model_board.threads">
 				<source>Threads of this board</source>
 			</trans-unit>
-			
+			<trans-unit id="tx_forum_domain_model_board.all_threads">
+				<source>Total number of threads (including daughter-boards)</source>
+			</trans-unit>
+			<trans-unit id="tx_forum_domain_model_board.tree">
+    				<source>Tree of boards </source>
+    		</trans-unit>
 			<trans-unit id="tx_forum_domain_model_thread">
 				<source>A forum thread</source>
 			</trans-unit>
@@ -46,7 +63,14 @@
 			<trans-unit id="tx_forum_domain_model_forumuser">
 				<source>FE Users for forum</source>
 			</trans-unit>
-			
+
+
+			<trans-unit id="all_threads.recount">
+				<source>updated from %s threads.</source>
+			</trans-unit>
+			<trans-unit id="all_threads.unchanged">
+				<source>Nothing changed.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
